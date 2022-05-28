@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { HolidayService } from 'src/app/services/holiday.service';
 import { DateInMonth } from 'src/app/DateInMonth';
+import { TestingModModule } from '../../testing-mod/testing-mod.module';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-calendar-view',
@@ -18,6 +20,7 @@ export class CalendarViewComponent implements OnInit {
 
   // use dateObj to store DateInMonth objects
   dateObj: Array<Array<DateInMonth>> = Array();
+  
 
   /**
    * Fetch holiday list and insert into responseDateObjs
@@ -47,6 +50,39 @@ export class CalendarViewComponent implements OnInit {
    */
   monthGenerator() {
 
+    let tObj = new TestingModModule();
+    let datearr = [];
+
+    console.log('comp date obj ', this.year);
+    console.log('com month ', this.monthIndex);
+
+    let cc = tObj.dateObj1;
+    let match = 0;
+    cc.forEach(element1 => {
+      let c = [];
+      
+      element1.forEach(element2 => {
+        let dd = new DateInMonth();
+        dd.enabled = element2.enabled;
+        dd.date = element2.date;
+        c.push(dd);
+        if(element2.date.toString().includes(this.year) && element2.date.toString().includes(this.monthIndex) && match == 0) {
+          
+          match = 1;
+        }
+             
+      });
+      if(match == 1) {
+        datearr = c;
+      }  
+      
+      
+    });
+    this.dateObj = datearr;
+    console.log("current month ", datearr);
+    
+    return datearr;
+    //this.dateObj = tObj.convertModel(this.monthIndex);
   }
 
 

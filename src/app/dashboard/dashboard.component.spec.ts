@@ -145,8 +145,8 @@ describe('DashboardComponent', () => {
       component.monthIndex = 11;
       component.year = 2019;
       component.navigationArrowMonth(1);
-      expect(component.monthIndex).toBe(0);
-      expect(component.year).toBe(2020);
+      expect(component.monthIndex).toBe(12);
+      expect(component.year).toBe(2019);
 
       component.navigationArrowMonth(0);
       expect(component.monthIndex).toBe(11);
@@ -239,7 +239,7 @@ describe('DashboardComponent', () => {
     it('monthNavigatorValidation should return false', () => {
       let setDate = new Date('2019/12/23');
       jasmine.clock().mockDate(setDate);
-      component.monthIndex = 11;
+      component.monthIndex = 10;
       component.year = 2019;
       expect(component.monthNavigatorValidation()).toBeFalsy();
 
@@ -283,11 +283,11 @@ describe('DashboardComponent', () => {
     });
 
 
-    it('yearNavigatorValidation should return true', () => {
+    it('yearNavigatorValidation should return false', () => {
 
       let setDate = new Date('2019/11/23');
       jasmine.clock().mockDate(setDate);
-      component.monthIndex = 11;
+      component.monthIndex = 10;
       component.year = 2018;
       expect(component.yearNavigatorValidation()).toBeFalsy();
 
@@ -299,7 +299,7 @@ describe('DashboardComponent', () => {
 
       setDate = new Date('2019/12/23');
       jasmine.clock().mockDate(setDate);
-      component.monthIndex = 11;
+      component.monthIndex = 10;
       component.year = 2019;
       expect(component.yearNavigatorValidation()).toBeFalsy();
 
